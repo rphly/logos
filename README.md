@@ -111,7 +111,7 @@ No custom Claude configuration is required — logos works with the standard Cla
 Pull requests are welcome. The project is a single Node.js package — no build step required.
 
 ```bash
-git clone https://github.com/Orchestra-Research/logos.git
+git clone https://github.com/rphly/logos.git
 cd logos
 node bin/logos.js mytest   # smoke test
 npm test                   # unit tests

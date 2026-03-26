@@ -1,7 +1,7 @@
 export function readmeMd(projectName) {
   return `# ${projectName}
 
-> AI research project scaffolded with [logos](https://github.com/YOUR_USERNAME/logos)
+> AI research project scaffolded with [logos](https://github.com/rphly/logos)
 
 ## Research Agenda
 
