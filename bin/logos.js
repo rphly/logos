@@ -4,6 +4,8 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { init } from "../src/init.js";
+import { status } from "../src/status.js";
+import { update } from "../src/update.js";
 
 const pkg = JSON.parse(
   readFileSync(
@@ -21,12 +23,12 @@ program
   .option("--update", "Update Orchestra Research skills")
   .action((projectName, options) => {
     if (options.status) {
-      console.error("--status not yet implemented");
-      process.exit(1);
+      status();
+      return;
     }
     if (options.update) {
-      console.error("--update not yet implemented");
-      process.exit(1);
+      update();
+      return;
     }
     if (!projectName) {
       program.help({ error: true });

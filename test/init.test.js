@@ -132,3 +132,21 @@ describe("logos init", () => {
     });
   });
 });
+
+describe("logos --status", () => {
+  it("reports error outside a logos project", () => {
+    const tmpDir = mkdtempSync(path.join(os.tmpdir(), "logos-test-"));
+    try {
+      execFileSync("node", [bin, "--status"], {
+        cwd: tmpDir,
+        encoding: "utf-8",
+        stdio: "pipe",
+      });
+      assert.fail("should have exited with non-zero");
+    } catch (err) {
+      assert.match(err.stderr || err.stdout, /not a logos project/);
+    } finally {
+      rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+});
