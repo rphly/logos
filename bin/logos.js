@@ -3,6 +3,7 @@ import { program } from "commander";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { init } from "../src/init.js";
 
 const pkg = JSON.parse(
   readFileSync(
@@ -30,7 +31,7 @@ program
     if (!projectName) {
       program.help({ error: true });
     }
-    console.log(`TODO: scaffold ${projectName}`);
+    init(projectName);
   });
 
 program.parse();

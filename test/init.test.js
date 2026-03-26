@@ -1,8 +1,10 @@
 import { execFileSync } from "node:child_process";
-import { describe, it } from "node:test";
+import { mkdtempSync, rmSync, existsSync, readFileSync } from "node:fs";
+import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import os from "node:os";
 
 const bin = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -57,5 +59,76 @@ describe("templates", () => {
   it("readme template accepts project name", () => {
     const content = templates.readmeMd("my-project");
     assert.match(content, /my-project/);
+  });
+});
+
+describe("logos init", () => {
+  let tmpDir;
+  let projectDir;
+
+  beforeEach(() => {
+    tmpDir = mkdtempSync(path.join(os.tmpdir(), "logos-test-"));
+    projectDir = path.join(tmpDir, "test-project");
+  });
+
+  afterEach(() => {
+    rmSync(tmpDir, { recursive: true, force: true });
+  });
+
+  it("creates the project directory with all expected files", () => {
+    execFileSync("node", [bin, "test-project"], {
+      cwd: tmpDir,
+      encoding: "utf-8",
+      stdio: "pipe",
+    });
+
+    assert.ok(existsSync(projectDir));
+    assert.ok(existsSync(path.join(projectDir, ".logos")));
+    assert.ok(existsSync(path.join(projectDir, "CLAUDE.md")));
+    assert.ok(existsSync(path.join(projectDir, "agenda.md")));
+    assert.ok(existsSync(path.join(projectDir, "setup.md")));
+    assert.ok(existsSync(path.join(projectDir, "README.md")));
+    assert.ok(existsSync(path.join(projectDir, ".env.example")));
+    assert.ok(existsSync(path.join(projectDir, ".gitignore")));
+    assert.ok(existsSync(path.join(projectDir, ".git")));
+  });
+
+  it("creates empty directories", () => {
+    execFileSync("node", [bin, "test-project"], {
+      cwd: tmpDir,
+      encoding: "utf-8",
+      stdio: "pipe",
+    });
+
+    for (const dir of ["stages", "papers", "experiments", "notes", "data"]) {
+      assert.ok(existsSync(path.join(projectDir, dir)));
+    }
+  });
+
+  it("agenda.md has TEMPLATE sentinel", () => {
+    execFileSync("node", [bin, "test-project"], {
+      cwd: tmpDir,
+      encoding: "utf-8",
+      stdio: "pipe",
+    });
+
+    const content = readFileSync(path.join(projectDir, "agenda.md"), "utf-8");
+    assert.match(content, /<!-- TEMPLATE -->/);
+  });
+
+  it("fails if directory already exists", () => {
+    execFileSync("node", [bin, "test-project"], {
+      cwd: tmpDir,
+      encoding: "utf-8",
+      stdio: "pipe",
+    });
+
+    assert.throws(() => {
+      execFileSync("node", [bin, "test-project"], {
+        cwd: tmpDir,
+        encoding: "utf-8",
+        stdio: "pipe",
+      });
+    });
   });
 });
