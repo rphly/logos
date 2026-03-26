@@ -1,0 +1,20 @@
+{
+  "name": "logos-research",
+  "version": "0.1.0",
+  "description": "Scaffold AI research projects with staged workflows",
+  "type": "module",
+  "bin": {
+    "logos": "./bin/logos.js"
+  },
+  "scripts": {
+    "test": "node --test test/**/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["research", "ai", "cli", "scaffold"],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^13.0.0"
+  }
+}
