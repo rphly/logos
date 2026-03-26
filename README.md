@@ -1,8 +1,19 @@
-# logos
+```
+    __
+   / /   ____  ____ _____  _____
+  / /   / __ \/ __ `/ __ \/ ___/
+ / /___/ /_/ / /_/ / /_/ (__  )
+/_____/\____/\__, /\____/____/
+            /____/
+```
 
-**Scaffold a personal AI research project in one command.**
+**Your AI research assistant, from idea to paper.**
 
-logos creates a structured directory for AI/ML research, wires in [Orchestra Research's 89 AI Research Skills](https://github.com/Orchestra-Research/AI-Research-SKILLs) as a git submodule, and drops in a `CLAUDE.md` that instructs Claude Code to run your entire research lifecycle — from literature review through experimentation, analysis, and writing.
+logos scaffolds a personal AI research project in one command. It sets up a structured workspace, wires in [Orchestra Research's 89 AI Research Skills](https://github.com/Orchestra-Research/AI-Research-SKILLs), and drops in a `CLAUDE.md` that turns Claude Code into your research partner — guiding you through literature review, experimentation, analysis, and writing, one stage at a time.
+
+> *"Help me survey recent work on sparse autoencoders"*
+> *"Set up a fine-tuning run on Lambda Labs with Axolotl"*
+> *"Write up our findings as a NeurIPS-style paper"*
 
 ---
 
