@@ -126,7 +126,7 @@ logos --help      # Full usage
 
 ### Migrating existing projects
 
-When you update logos (`npm update -g logos-research`), existing projects don't automatically get new features like updated AGENT.md instructions or new MCP server configs. Run `logos --migrate` inside your project to prepare a migration — it writes the latest templates to `.logos-migrate/` with instructions for your AI agent to merge them intelligently, preserving all your research content.
+When you update logos (`npm update -g logos-research`), existing projects don't automatically get new features like updated AGENT.md instructions or new MCP server configs. Run `logos --migrate` inside your project — it writes the latest templates and automatically launches your AI agent to merge them, preserving all your research content. *(experimental)*
 
 ---
 
