@@ -21,6 +21,7 @@ program
   .argument("[project-name]", "Name of the research project to create")
   .option("--status", "Show current research stage")
   .option("--update", "Update Orchestra Research skills")
+  .option("--no-onboard", "Skip interactive onboarding")
   .action((projectName, options) => {
     if (options.status) {
       status();
@@ -33,7 +34,10 @@ program
     if (!projectName) {
       program.help({ error: true });
     }
-    init(projectName);
+    init(projectName, { onboard: options.onboard }).catch((err) => {
+      console.error(err.message);
+      process.exit(1);
+    });
   });
 
 program.parse();

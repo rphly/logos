@@ -1,4 +1,6 @@
+export { agentMd } from "./agent-md.js";
 export { claudeMd } from "./claude-md.js";
+export { claudeSettings } from "./claude-settings.js";
 export { agendaMd } from "./agenda-md.js";
 export { setupMd } from "./setup-md.js";
 export { readmeMd } from "./readme-md.js";

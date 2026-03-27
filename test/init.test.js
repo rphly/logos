@@ -27,7 +27,9 @@ import * as templates from "../src/templates/index.js";
 describe("templates", () => {
   it("exports all required templates", () => {
     const required = [
+      "agentMd",
       "claudeMd",
+      "claudeSettings",
       "agendaMd",
       "setupMd",
       "readmeMd",
@@ -49,11 +51,16 @@ describe("templates", () => {
     assert.match(content, /<!-- TEMPLATE -->/);
   });
 
-  it("CLAUDE.md includes stage workflow rules", () => {
-    const content = templates.claudeMd();
+  it("AGENT.md includes stage workflow rules", () => {
+    const content = templates.agentMd();
     assert.match(content, /stages\//);
     assert.match(content, /agenda\.md/);
     assert.match(content, /setup\.md/);
+  });
+
+  it("CLAUDE.md points to AGENT.md", () => {
+    const content = templates.claudeMd();
+    assert.match(content, /AGENT\.md/);
   });
 
   it("readme template accepts project name", () => {
@@ -76,7 +83,7 @@ describe("logos init", () => {
   });
 
   it("creates the project directory with all expected files", () => {
-    execFileSync("node", [bin, "test-project"], {
+    execFileSync("node", [bin, "test-project", "--no-onboard"], {
       cwd: tmpDir,
       encoding: "utf-8",
       stdio: "pipe",
@@ -84,6 +91,7 @@ describe("logos init", () => {
 
     assert.ok(existsSync(projectDir));
     assert.ok(existsSync(path.join(projectDir, ".logos")));
+    assert.ok(existsSync(path.join(projectDir, "AGENT.md")));
     assert.ok(existsSync(path.join(projectDir, "CLAUDE.md")));
     assert.ok(existsSync(path.join(projectDir, "agenda.md")));
     assert.ok(existsSync(path.join(projectDir, "setup.md")));
@@ -94,7 +102,7 @@ describe("logos init", () => {
   });
 
   it("creates empty directories", () => {
-    execFileSync("node", [bin, "test-project"], {
+    execFileSync("node", [bin, "test-project", "--no-onboard"], {
       cwd: tmpDir,
       encoding: "utf-8",
       stdio: "pipe",
@@ -106,7 +114,7 @@ describe("logos init", () => {
   });
 
   it("agenda.md has TEMPLATE sentinel", () => {
-    execFileSync("node", [bin, "test-project"], {
+    execFileSync("node", [bin, "test-project", "--no-onboard"], {
       cwd: tmpDir,
       encoding: "utf-8",
       stdio: "pipe",
@@ -117,7 +125,7 @@ describe("logos init", () => {
   });
 
   it("fails if directory already exists", () => {
-    execFileSync("node", [bin, "test-project"], {
+    execFileSync("node", [bin, "test-project", "--no-onboard"], {
       cwd: tmpDir,
       encoding: "utf-8",
       stdio: "pipe",

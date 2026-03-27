@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { gitSubmoduleUpdate } from "./git.js";
+import { step, success, error } from "./ui.js";
 
 export function findLogosRoot(dir) {
   if (existsSync(path.join(dir, ".logos"))) {
@@ -12,12 +13,12 @@ export function findLogosRoot(dir) {
 export function update(dir = process.cwd()) {
   const root = findLogosRoot(dir);
 
-  console.log("Updating Orchestra Research skills...");
+  step("Updating research skills");
   try {
     gitSubmoduleUpdate(root);
-    console.log("Skills updated successfully.");
+    success("Skills updated");
   } catch (err) {
-    console.error("Failed to update skills. Check your network connection.");
+    error("Failed to update skills. Check your network connection.");
     process.exit(1);
   }
 }

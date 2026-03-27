@@ -1,11 +1,12 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { banner, divider, dim, green, white, cyan, bold } from "./ui.js";
 
 const STAGES = [
-  { file: "1-research.md", name: "research" },
-  { file: "2-experimentation.md", name: "experimentation" },
-  { file: "3-analysis.md", name: "analysis" },
-  { file: "4-writing.md", name: "writing" },
+  { file: "1-research.md", name: "Research" },
+  { file: "2-experimentation.md", name: "Experimentation" },
+  { file: "3-analysis.md", name: "Analysis" },
+  { file: "4-writing.md", name: "Writing" },
 ];
 
 export function getStatus(dir) {
@@ -36,18 +37,30 @@ export function status(dir = process.cwd()) {
 
   const { currentStage, completed } = getStatus(dir);
 
-  console.log("\nResearch Progress:\n");
+  banner();
+  console.log(`  ${bold("Progress")}`);
+  console.log();
+
   for (const stage of STAGES) {
     const key = stage.file.replace(".md", "");
     const done = completed.includes(key);
     const current = stage.name === currentStage;
-    const marker = done ? "✓" : current ? "→" : " ";
-    console.log(`  ${marker} ${stage.name}`);
+
+    if (done) {
+      console.log(`  ${green("✓")} ${dim(stage.name)}`);
+    } else if (current) {
+      console.log(`  ${cyan("›")} ${white(stage.name)} ${dim("← you are here")}`);
+    } else {
+      console.log(`  ${dim("·")} ${dim(stage.name)}`);
+    }
   }
 
+  console.log();
+
   if (!currentStage) {
-    console.log("\n  All stages complete.\n");
-  } else {
-    console.log(`\n  Current stage: ${currentStage}\n`);
+    console.log(`  ${green("All stages complete.")}`);
   }
+
+  divider();
+  console.log();
 }
