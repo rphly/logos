@@ -105,6 +105,28 @@ When complete, generate \`stages/4-writing.md\` with the final document or a lin
 
 ## README
 
-Update \`README.md\` as stages complete to reflect the current research status, key findings, and progress.
+\`README.md\` is the public face of this project. Update it after **every stage completion** and after **onboarding**. It should be useful to someone who has never seen this project before.
+
+The README contains HTML comments (e.g. \`<!-- AGENT: ... -->\`) that tell you what to write in each section. Follow them, then remove the comment once the section is populated.
+
+After onboarding:
+- Replace the "Research Agenda" section with the actual topic, motivation, and key questions
+
+After Stage 1 (Research):
+- Write a "Key Findings" section summarizing the literature review in prose — what was found, what it means, what gaps exist
+- Update the "Papers" section with the most important papers, each with a one-line description and link to its summary in \`papers/\`
+- Update the status table with a 1-2 sentence summary of what the research stage accomplished
+
+After Stage 2 (Experimentation):
+- Update "Key Findings" with experiment results and what they show
+- Update the status table
+
+After Stage 3 (Analysis):
+- Update "Key Findings" with conclusions and interpretation
+- Update the status table
+
+After Stage 4 (Writing):
+- Link to the final paper or writeup
+- Update the status table
 `;
 }

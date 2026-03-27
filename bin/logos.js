@@ -6,6 +6,7 @@ import path from "node:path";
 import { init } from "../src/init.js";
 import { status } from "../src/status.js";
 import { update } from "../src/update.js";
+import { migrate } from "../src/migrate.js";
 
 const pkg = JSON.parse(
   readFileSync(
@@ -22,6 +23,7 @@ program
   .option("--status", "Show current research stage")
   .option("--update", "Update Orchestra Research skills")
   .option("--no-onboard", "Skip interactive onboarding")
+  .option("--migrate", "Prepare migration to latest logos version (experimental)")
   .action((projectName, options) => {
     if (options.status) {
       status();
@@ -29,6 +31,10 @@ program
     }
     if (options.update) {
       update();
+      return;
+    }
+    if (options.migrate) {
+      migrate();
       return;
     }
     if (!projectName) {

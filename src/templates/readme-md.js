@@ -5,9 +5,19 @@ export function readmeMd(projectName) {
 
 ## Research Agenda
 
-*Run this project in Claude Code to begin the onboarding process and define your research agenda.*
+<!-- AGENT: Replace this section with the research topic, motivation, and key questions from agenda.md after onboarding. -->
+
+*Pending onboarding.*
+
+## Key Findings
+
+<!-- AGENT: After each stage, update this section with the most important findings so far. This is the first thing someone reads — make it count. Write in prose, not bullet points. Summarize what you found, what it means, and what's next. -->
+
+*No findings yet.*
 
 ## Status
+
+<!-- AGENT: Update this table as stages complete. Replace "Not started" with a 1-2 sentence summary of what was accomplished in that stage. -->
 
 | Stage | Status |
 |-------|--------|
@@ -16,35 +26,22 @@ export function readmeMd(projectName) {
 | Analysis | Not started |
 | Writing | Not started |
 
-## Project Structure
+## Papers
 
-| Directory | Purpose |
-|-----------|---------|
-| \`stages/\` | Stage completion files (source of truth for progress) |
-| \`papers/\` | PDFs, references, literature |
-| \`experiments/\` | Code, notebooks, results |
-| \`notes/\` | Freeform research notes |
-| \`data/\` | Datasets, raw data |
-| \`.claude/skills/\` | Orchestra Research AI skills |
+<!-- AGENT: After Stage 1, list the most important papers here with one-line descriptions. Link to the summary file in papers/. -->
+
+*No papers collected yet.*
 
 ## Getting Started
 
-1. Open this directory in Claude Code
+1. Open this directory in your AI coding agent
 2. The agent will guide you through onboarding (research goals + infrastructure setup)
 3. Progress through stages: Research → Experimentation → Analysis → Writing
-
-## Cloning This Project
 
 After cloning, initialize the skills submodule:
 
 \`\`\`bash
 git submodule init && git submodule update
-\`\`\`
-
-## Updating Skills
-
-\`\`\`bash
-logos --update
 \`\`\`
 `;
 }

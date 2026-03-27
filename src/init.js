@@ -1,10 +1,17 @@
-import { mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import path from "node:path";
 import { checkGit, gitInit, gitAdd, gitCommit, gitAddSubmodule } from "./git.js";
 import { onboard } from "./onboard.js";
 import * as templates from "./templates/index.js";
 import { banner, step, success, warn, info, dim } from "./ui.js";
+
+const pkg = JSON.parse(
+  readFileSync(
+    path.resolve(path.dirname(new URL(import.meta.url).pathname), "../package.json"),
+    "utf-8"
+  )
+);
 
 const SKILLS_REPO = "https://github.com/Orchestra-Research/AI-Research-SKILLs.git";
 const SKILLS_DEST = ".claude/skills";
@@ -30,7 +37,7 @@ export async function init(projectName, { onboard: runOnboard = true } = {}, cwd
   }
 
   // Write files
-  writeFileSync(path.join(projectDir, ".logos"), "");
+  writeFileSync(path.join(projectDir, ".logos"), pkg.version);
   writeFileSync(path.join(projectDir, "AGENT.md"), templates.agentMd());
   writeFileSync(path.join(projectDir, "CLAUDE.md"), templates.claudeMd());
   writeFileSync(path.join(projectDir, ".claude/settings.json"), templates.claudeSettings());
