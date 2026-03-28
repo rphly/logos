@@ -1,6 +1,6 @@
 {
   "name": "logos-research",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Scaffold AI research projects with staged workflows",
   "type": "module",
   "bin": {
@@ -12,7 +12,12 @@
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["research", "ai", "cli", "scaffold"],
+  "keywords": [
+    "research",
+    "ai",
+    "cli",
+    "scaffold"
+  ],
   "license": "MIT",
   "dependencies": {
     "commander": "^13.0.0"
