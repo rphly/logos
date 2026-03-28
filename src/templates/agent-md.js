@@ -136,10 +136,32 @@ Write code, run experiments, collect results.
 - Emerging techniques → \`19-emerging/\` (MoE, Model Merging, Distillation, Pruning)
 Also check any custom skills created during onboarding at \`.claude/skills/custom/\`.
 
-- Save experiment code and configs to \`experiments/\`
+**Git branching — each experiment is an independent feature branch.**
+Every experiment MUST run on its own clean branch off \`main\`. This is non-negotiable.
+
+1. **Create the branch** before writing any experiment code:
+   \`\`\`
+   git checkout main
+   git checkout -b exp/<short-name>   # e.g. exp/lr-sweep, exp/mamba-baseline, exp/lora-r16
+   \`\`\`
+2. **Keep it self-contained.** All code, configs, data scripts, and results for that experiment live on its branch. Do not mix experiments across branches.
+3. **Never commit experiment code to \`main\`.** Main stays clean — only shared infrastructure, documentation, and merged results belong there.
+4. **Parallel experiments = parallel branches.** If you're running 3 experiments concurrently, that's 3 branches, each checked out in its own worktree or by its own subagent.
+5. **Use git worktrees for concurrency.** You cannot checkout multiple branches in a single working directory. For each parallel experiment:
+   \`\`\`
+   git worktree add ../experiments/<short-name> exp/<short-name>
+   \`\`\`
+   Run the experiment from that worktree. Remove it when done: \`git worktree remove ../experiments/<short-name>\`
+6. **When an experiment succeeds**, merge its results (not necessarily all code) back to main via a clean merge or cherry-pick. When it fails, leave the branch as a record — don't delete it.
+7. **Branch naming convention:** \`exp/<category>/<name>\` or \`exp/<name>\`. Examples:
+   - \`exp/training/lr-cosine-warmup\`
+   - \`exp/data/dedup-minhash\`
+   - \`exp/arch/mamba-hybrid\`
+
+- Save experiment code and configs to \`experiments/\` on the experiment branch
 - Each sub-agent writes its own notes file to \`notes/\` for observations, unexpected results, and ideas
 
-**Run experiments in parallel when possible.** Experiments that don't depend on each other's results should run concurrently — don't wait for one to finish before starting the next. Use separate compute instances, separate tracking runs, and separate monitoring subagents. Only serialize experiments that are contingent on prior results (e.g. a follow-up that depends on which hyperparameters won).
+**Run experiments in parallel when possible.** Experiments that don't depend on each other's results should run concurrently — don't wait for one to finish before starting the next. Use separate compute instances, separate tracking runs, separate branches, and separate monitoring subagents. Only serialize experiments that are contingent on prior results (e.g. a follow-up that depends on which hyperparameters won).
 
 **Monitoring:** You are responsible for actively monitoring running experiments. Do not stop and ask "want me to check?" — just check. Check \`.env\` and \`setup.md\` for available credentials and use them:
 - **Compute platforms** (RunPod, Lambda, Modal, etc.) — use their APIs or CLIs to check pod/instance status, SSH in to inspect logs, tail training output
