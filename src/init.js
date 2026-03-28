@@ -70,7 +70,16 @@ export async function init(projectName, { onboard: runOnboard = true } = {}, cwd
     success("Skills installed " + dim("(.claude/skills/)"));
   } else {
     warn("Could not clone skills " + dim("(network issue?)"));
-    info("Run 'logos --update' inside the project to retry.");
+    info("Writing fallback skill routing index...");
+    mkdirSync(path.join(projectDir, SKILLS_DEST), { recursive: true });
+    writeFileSync(
+      path.join(projectDir, SKILLS_DEST, "skill-routing.md"),
+      templates.skillRouting()
+    );
+    gitAdd(projectDir);
+    gitCommit(projectDir, "Add fallback skill routing index");
+    success("Routing index written " + dim("(.claude/skills/skill-routing.md)"));
+    info("Run 'logos --update' inside the project to install full skills.");
   }
 
   // Check for uv (needed by arxiv MCP server)

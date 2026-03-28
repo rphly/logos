@@ -6,3 +6,4 @@ export { setupMd } from "./setup-md.js";
 export { readmeMd } from "./readme-md.js";
 export { envExample } from "./env-example.js";
 export { gitignore } from "./gitignore.js";
+export { skillRouting } from "./fallback-skills.js";
