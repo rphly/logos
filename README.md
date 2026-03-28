@@ -11,6 +11,8 @@
 
 logos scaffolds an AI research project in one command. It sets up a structured workspace, wires in [Orchestra Research's 89 AI Research Skills](https://github.com/Orchestra-Research/AI-Research-SKILLs), configures an arXiv MCP server for paper search and download, and drops in an `AGENT.md` that turns your AI coding agent into a research partner — guiding you through literature review, experimentation, analysis, and writing, one stage at a time.
 
+Your agent doesn't just plan — it executes. It automates literature search and synthesis, spins up GPU pods on Lambda Labs or RunPod, launches training runs with Axolotl or custom scripts, monitors logs and metrics in real time, and iterates on hyperparameters and experiment design based on what it observes. The full research loop, from reading papers to shipping runs to analyzing results, stays inside a single conversation.
+
 > *"Help me survey recent work on sparse autoencoders"*
 > *"Set up a fine-tuning run on Lambda Labs with Axolotl"*
 > *"Write up our findings as a NeurIPS-style paper"*
